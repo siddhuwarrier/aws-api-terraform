@@ -1,7 +1,12 @@
 resource "aws_alb" "main" {
-  name            = "aws-api-load-balancer"
+  name            = "${var.env}-aws-api-load-balancer"
   subnets         = var.public_subnet_ids
   security_groups = [aws_security_group.alb_sg.id]
+
+  tags = {
+    Name        = "${var.env}-aws-api-load-balancer"
+    Environment = var.env
+  }
 }
 
 # TODO switch to HTTPS and 443 with ACM

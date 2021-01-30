@@ -36,11 +36,37 @@ variable "health_check_path" {
 }
 
 variable "public_subnet_ids" {
-  type        = "list"
+  type        = list(string)
   description = "Subnet ids"
 }
 
 variable "private_subnet_ids" {
-  type        = "list"
+  type        = list(string)
   description = "Subnet ids"
+}
+
+variable "db_access_sg_id" {
+  description = "ID of security group that has access to the RDS instance"
+}
+
+variable "env" {
+  description = "The environment we are deploying to"
+  default     = "staging"
+}
+
+variable "db_endpoint" {
+}
+
+variable "database_name" {
+}
+
+variable "database_username" {
+}
+
+variable "database_password" {
+}
+
+variable "log_retention_days" {
+  description = "Number of days to keep Cloudwatch logs"
+  default     = "5"
 }

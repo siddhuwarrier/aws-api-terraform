@@ -1,5 +1,5 @@
 resource "aws_security_group" "alb_sg" {
-  name        = "aws-api-load-balancer-security-group"
+  name        = "${var.env}-aws-api-load-balancer-security-group"
   description = "ALB Security Group"
   vpc_id      = var.aws_vpc_id
 
@@ -16,10 +16,15 @@ resource "aws_security_group" "alb_sg" {
     to_port     = 0
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  tags = {
+    Name        = "${var.env}-aws-api-load-balancer-security-group"
+    Environment = var.env
+  }
 }
 
 resource "aws_security_group" "ecs_sg" {
-  name        = "aws-api-ecs-tasks-security-group"
+  name        = "${var.env}-aws-api-ecs-tasks-security-group"
   description = "allow inbound access to ECS tasks from the ALB only"
   vpc_id      = var.aws_vpc_id
 
@@ -35,5 +40,10 @@ resource "aws_security_group" "ecs_sg" {
     from_port   = 0
     to_port     = 0
     cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name        = "${var.env}-aws-api-ecs-tasks-security-group"
+    Environment = var.env
   }
 }

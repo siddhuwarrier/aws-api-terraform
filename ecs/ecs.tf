@@ -11,11 +11,16 @@ data "template_file" "aws_api_microservice_tpl" {
     fargate_cpu       = var.fargate_cpu
     fargate_memory    = var.fargate_memory
     aws_region        = var.aws_region
+    env               = var.env
+    db_endpoint       = var.db_endpoint
+    db_name           = var.database_name
+    db_password       = var.database_password
+    db_username       = var.database_username
   }
 }
 
 resource "aws_ecs_task_definition" "microservice" {
-  family                   = "aws-api-microservice-task"
+  family                   = "${var.env}-aws-api-microservice-task"
   execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
@@ -25,21 +30,21 @@ resource "aws_ecs_task_definition" "microservice" {
 }
 
 resource "aws_ecs_service" "main" {
-  name            = "aws-api-service"
+  name            = "${var.env}-aws-api-service"
   cluster         = aws_ecs_cluster.main.id
   task_definition = aws_ecs_task_definition.microservice.arn
   desired_count   = var.microservice_count
   launch_type     = "FARGATE"
 
   network_configuration {
-    security_groups  = [aws_security_group.ecs_sg.id]
+    security_groups  = [aws_security_group.ecs_sg.id, var.db_access_sg_id]
     subnets          = var.private_subnet_ids
     assign_public_ip = true
   }
 
   load_balancer {
     target_group_arn = aws_alb_target_group.microservice_target_group.id
-    container_name   = "aws-api-microservice"
+    container_name   = "${var.env}-aws-api-microservice"
     container_port   = var.microservice_port
   }
 
