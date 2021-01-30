@@ -1,6 +1,6 @@
 resource "aws_cloudwatch_log_group" "microservice_log_group" {
-  name              = "/ecs/aws-api-microservice"
-  retention_in_days = 30
+  name              = "/ecs/${var.env}-aws-api-microservice"
+  retention_in_days = var.log_retention_days
 
   tags = {
     Name = "aws-api-microservice-log-group"
