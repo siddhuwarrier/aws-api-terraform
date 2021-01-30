@@ -3,6 +3,10 @@ data "aws_availability_zones" "available" {
 
 resource "aws_vpc" "main" {
   cidr_block = "10.10.0.0/16"
+  tags = {
+    Environment = var.env
+    Name        = "${var.env}-vpc"
+  }
 }
 
 resource "aws_subnet" "private" {
@@ -10,6 +14,10 @@ resource "aws_subnet" "private" {
   cidr_block        = cidrsubnet(aws_vpc.main.cidr_block, 8, count.index) # create a /24 subnet within the /16 CIDR block in the VPC
   availability_zone = data.aws_availability_zones.available.names[count.index]
   vpc_id            = aws_vpc.main.id
+  tags = {
+    Environment = var.env
+    Name        = "${var.env}-private-subnet-${data.aws_availability_zones.available.names[count.index]}"
+  }
 }
 
 resource "aws_subnet" "public" {
@@ -18,6 +26,10 @@ resource "aws_subnet" "public" {
   availability_zone       = data.aws_availability_zones.available.names[count.index]
   vpc_id                  = aws_vpc.main.id
   map_public_ip_on_launch = true
+  tags = {
+    Environment = var.env
+    Name        = "${var.env}-public-subnet-${data.aws_availability_zones.available.names[count.index]}"
+  }
 }
 
 resource "aws_internet_gateway" "aws_api_igw" {

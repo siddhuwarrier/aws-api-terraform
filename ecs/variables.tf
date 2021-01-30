@@ -50,8 +50,6 @@ variable "db_access_sg_id" {
 }
 
 variable "env" {
-  description = "The environment we are deploying to"
-  default     = "staging"
 }
 
 variable "db_endpoint" {
