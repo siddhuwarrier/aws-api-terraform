@@ -6,6 +6,11 @@ variable "ecs_task_execution_role_name" {
   default     = "microserviceTaskExecutionRole"
 }
 
+variable "ecs_task_role_name" {
+  description = "ECS task role name"
+  default     = "microserviceTaskRole"
+}
+
 variable "microservice_img" {
   description = "Docker image to run in the ECS cluster"
   default     = "686080651210.dkr.ecr.eu-west-2.amazonaws.com/siddhuw.info:latest"

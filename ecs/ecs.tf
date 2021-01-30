@@ -22,6 +22,7 @@ data "template_file" "aws_api_microservice_tpl" {
 resource "aws_ecs_task_definition" "microservice" {
   family                   = "${var.env}-aws-api-microservice-task"
   execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
+  task_role_arn            = aws_iam_role.ecs_task_role.arn
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   cpu                      = var.fargate_cpu
@@ -48,5 +49,5 @@ resource "aws_ecs_service" "main" {
     container_port   = var.microservice_port
   }
 
-  depends_on = [aws_alb_listener.microservice_listener, aws_iam_role_policy_attachment.ecs_task_execution_role]
+  depends_on = [aws_alb_listener.microservice_listener, aws_iam_role_policy_attachment.ecs_task_execution_role_attachment, aws_iam_role_policy_attachment.ecs_task_role_ec2_attachment]
 }

@@ -10,7 +10,7 @@ These scripts have been written using Terraform 0.13.1.
 
 If you want to deploy the AWS API into your own AWS environment, you need to have:
 
-- Terraform (brew install terraform)
+- Terraform (`brew install terraform`)
 - Your AWS credentials stored in `~/.aws/credentials`
 - Your profile needs to be called `default`
 
