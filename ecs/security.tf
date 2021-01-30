@@ -1,7 +1,7 @@
 resource "aws_security_group" "alb_sg" {
   name        = "aws-api-load-balancer-security-group"
   description = "ALB Security Group"
-  vpc_id      = aws_vpc.main.id
+  vpc_id      = var.aws_vpc_id
 
   ingress {
     protocol    = "tcp"
@@ -21,7 +21,7 @@ resource "aws_security_group" "alb_sg" {
 resource "aws_security_group" "ecs_sg" {
   name        = "aws-api-ecs-tasks-security-group"
   description = "allow inbound access to ECS tasks from the ALB only"
-  vpc_id      = aws_vpc.main.id
+  vpc_id      = var.aws_vpc_id
 
   ingress {
     protocol        = "tcp"

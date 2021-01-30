@@ -3,7 +3,7 @@ resource "aws_ecs_cluster" "main" {
 }
 
 data "template_file" "aws_api_microservice_tpl" {
-  template = file("./templates/ecs/aws_api_microservice.json.tpl")
+  template = file("./ecs/templates/aws_api_microservice.json.tpl")
 
   vars = {
     microservice_img  = var.microservice_img
@@ -33,7 +33,7 @@ resource "aws_ecs_service" "main" {
 
   network_configuration {
     security_groups  = [aws_security_group.ecs_sg.id]
-    subnets          = aws_subnet.private.*.id
+    subnets          = var.private_subnet_ids
     assign_public_ip = true
   }
 
