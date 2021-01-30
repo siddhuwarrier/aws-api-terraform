@@ -26,12 +26,18 @@ resource "aws_security_group" "rds_sg" {
     self      = true
   }
 
-  //allow traffic for TCP 5432
+  //allow traffic for TCP 5432 from ECS and the Bastion Host
   ingress {
     from_port       = 5432
     to_port         = 5432
     protocol        = "tcp"
     security_groups = [aws_security_group.db_access_sg.id]
+  }
+  ingress {
+    from_port       = 5432
+    to_port         = 5432
+    protocol        = "tcp"
+    security_groups = [var.db_bastion_sg_id]
   }
 
   // outbound internet access
