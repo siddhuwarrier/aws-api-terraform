@@ -5,3 +5,5 @@
 plan.out
 # Module directory
 .terraform/
+siddhuw.info.tfvars
+*.tfvars
