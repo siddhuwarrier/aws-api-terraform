@@ -30,8 +30,10 @@ resource "aws_alb_target_group" "microservice_target_group" {
 
 resource "aws_alb_listener" "microservice_listener" {
   load_balancer_arn = aws_alb.main.id
-  port              = var.microservice_port
-  protocol          = "HTTP"
+  port              = "443"
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  certificate_arn   = "arn:aws:acm:eu-west-2:686080651210:certificate/cf25dc43-2f71-416d-8966-43580d4a0a34"
 
   default_action {
     target_group_arn = aws_alb_target_group.microservice_target_group.id
