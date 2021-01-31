@@ -38,3 +38,11 @@ resource "aws_alb_listener" "microservice_listener" {
     type             = "forward"
   }
 }
+
+resource "aws_route53_record" "deployment_dns" {
+  zone_id = var.hosted_zone_id
+  name    = "${var.env}.${var.hosted_zone_dns}"
+  type    = "CNAME"
+  ttl     = "300"
+  records = [aws_alb.main.dns_name]
+}

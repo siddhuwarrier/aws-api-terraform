@@ -23,9 +23,17 @@ If you are using these Terraform scripts to spin this up in your own AWS environ
 ```
 database_password = "<YOUR_DB_PASSWORD>"
 bastion_host_pubkey = "<YOUR_RSA_PUBKEY>"
+hosted_zone_id = "<YOUR_HOSTED_ZONE_ID>"
+hosted_zone_dns = "<YOUR_HOSTED_ZONE_DNS>"
 ```
 
 You can call it `your-name.tfvars` for instance.
+
+_NOTE_: If you are not using AWS Route 53 for DNS in your domain,
+
+- Do not add the `hosted_zone_id` and `hosted_zone_dns` entries in your tfvars file.
+- Remove the variable `hosted_zone_id` and `hosted_zone_dns` from `./variables.tf`, `ecs/variables.tf` and `./main.tf`.
+- Remove the `aws_route53_record` resource from `ecs/alb.tf`. Otherwise, things won't work.
 
 ## How to run
 

@@ -42,4 +42,6 @@ module "ecs" {
   db_access_sg_id    = module.rds.db_access_sg_id
   db_endpoint        = module.rds.db_endpoint
   env                = var.env
+  hosted_zone_dns    = var.hosted_zone_dns
+  hosted_zone_id     = var.hosted_zone_id
 }
