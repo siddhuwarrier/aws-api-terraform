@@ -25,3 +25,11 @@ variable "env" {
 variable "bastion_host_pubkey" {
   description = "Public key of the SSH RSA keypair you want to use to authenticate against the Bastion host"
 }
+
+variable "hosted_zone_dns" {
+  description = "The DNS of the hosted zone; for example, mine is awsapi.siddhuw.info."
+}
+
+variable "hosted_zone_id" {
+  description = "The ID of the hosted zone used"
+}

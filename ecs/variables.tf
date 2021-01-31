@@ -73,3 +73,7 @@ variable "log_retention_days" {
   description = "Number of days to keep Cloudwatch logs"
   default     = "5"
 }
+
+variable "hosted_zone_id" {}
+
+variable "hosted_zone_dns" {}
