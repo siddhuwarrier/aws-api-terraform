@@ -38,6 +38,9 @@ resource "aws_ecs_service" "main" {
   launch_type                        = "FARGATE"
   deployment_minimum_healthy_percent = 100
   deployment_maximum_percent         = 250
+  lifecycle {
+    ignore_changes = [task_definition]
+  }
 
   network_configuration {
     security_groups  = [aws_security_group.ecs_sg.id, var.db_access_sg_id]
