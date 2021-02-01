@@ -45,3 +45,11 @@ module "ecs" {
   hosted_zone_dns    = var.hosted_zone_dns
   hosted_zone_id     = var.hosted_zone_id
 }
+
+module "swagger" {
+  source          = "./swagger"
+  hosted_zone_id  = var.hosted_zone_id
+  hosted_zone_dns = var.hosted_zone_dns
+  aws_region      = var.aws_region
+  env             = var.env
+}

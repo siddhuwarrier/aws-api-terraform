@@ -1,3 +1,11 @@
+output "microservice_dns" {
+  value = module.ecs.microservice_dns
+}
+
+output "swagger_ui_dns" {
+  value = module.swagger.swagger_ui_dns
+}
+
 output "alb_hostname" {
   value = module.ecs.alb_hostname
 }

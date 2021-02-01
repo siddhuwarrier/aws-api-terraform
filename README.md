@@ -25,6 +25,7 @@ database_password = "<YOUR_DB_PASSWORD>"
 bastion_host_pubkey = "<YOUR_RSA_PUBKEY>"
 hosted_zone_id = "<YOUR_HOSTED_ZONE_ID>"
 hosted_zone_dns = "<YOUR_HOSTED_ZONE_DNS>"
+swagger_ui_dns = "<YOUR_SWAGGER_UI_DNS>"
 ```
 
 You can call it `your-name.tfvars` for instance.
