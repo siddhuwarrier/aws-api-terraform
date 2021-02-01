@@ -31,11 +31,13 @@ resource "aws_ecs_task_definition" "microservice" {
 }
 
 resource "aws_ecs_service" "main" {
-  name            = "${var.env}-aws-api-service"
-  cluster         = aws_ecs_cluster.main.id
-  task_definition = aws_ecs_task_definition.microservice.arn
-  desired_count   = var.microservice_count
-  launch_type     = "FARGATE"
+  name                               = "${var.env}-aws-api-service"
+  cluster                            = aws_ecs_cluster.main.id
+  task_definition                    = aws_ecs_task_definition.microservice.arn
+  desired_count                      = var.microservice_count
+  launch_type                        = "FARGATE"
+  deployment_minimum_healthy_percent = 100
+  deployment_maximum_percent         = 250
 
   network_configuration {
     security_groups  = [aws_security_group.ecs_sg.id, var.db_access_sg_id]
