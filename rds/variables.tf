@@ -1,10 +1,16 @@
 variable "aws_region" {}
+variable "aws_replica_region" {}
 variable "aws_vpc_id" {}
 
 variable "env" {
 }
 
 variable "private_subnet_ids" {
+  type        = list(string)
+  description = "Subnet ids"
+}
+
+variable "private_replica_subnet_ids" {
   type        = list(string)
   description = "Subnet ids"
 }
