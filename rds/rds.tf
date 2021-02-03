@@ -22,7 +22,7 @@ resource "aws_db_instance" "aws_api_db_rds" {
 # Read Replica
 resource "aws_db_instance" "aws_api_db_rds_replica" {
   provider               = aws.replica_region
-  replicate_source_db    = aws_db_instance.aws_api_db_rds.identifier
+  replicate_source_db    = aws_db_instance.aws_api_db_rds.arn
   identifier             = "${var.env}-database-read-replica"
   allocated_storage      = var.allocated_storage
   engine                 = "postgres"

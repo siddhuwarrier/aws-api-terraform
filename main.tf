@@ -27,6 +27,7 @@ module "rds" {
   db_bastion_sg_id           = module.vpc.db_bastion_sg_id
   env                        = var.env
   aws_replica_region         = var.aws_replica_region
+  aws_replica_vpc_id         = module.vpc.aws_replica_vpc_id
 }
 
 module "ec2" {

@@ -10,7 +10,7 @@ resource "aws_security_group" "db_access_sg" {
 }
 
 resource "aws_security_group" "db_access_sg_replica" {
-  vpc_id      = var.aws_vpc_id
+  vpc_id      = var.aws_replica_vpc_id
   provider    = aws.replica_region
   name        = "${var.env}-db-access-sg-replica"
   description = "Allow access to RDS (Replica)"
@@ -66,7 +66,7 @@ resource "aws_security_group" "rds_sg_replica" {
   name        = "${var.env}-rds-sg-replica"
   description = "${var.env} Security Group (Replica)"
   provider    = aws.replica_region
-  vpc_id      = var.aws_vpc_id
+  vpc_id      = var.aws_replica_vpc_id
   tags = {
     Name        = "${var.env}-rds-sg"
     Environment = var.env

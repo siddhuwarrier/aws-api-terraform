@@ -1,6 +1,7 @@
 variable "aws_region" {}
 variable "aws_replica_region" {}
 variable "aws_vpc_id" {}
+variable "aws_replica_vpc_id" {}
 
 variable "env" {
 }
