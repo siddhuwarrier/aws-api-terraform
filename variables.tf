@@ -3,6 +3,11 @@ variable "aws_region" {
   default     = "eu-west-2"
 }
 
+variable "aws_replica_region" {
+  description = "AWS replica region to use"
+  default     = "eu-west-1"
+}
+
 variable "database_username" {
   default     = "postgres"
   description = "The default postgres username"

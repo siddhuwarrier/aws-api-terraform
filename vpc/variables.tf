@@ -3,5 +3,9 @@ variable "az_count" {
   default     = "2"
 }
 
+variable "aws_replica_region" {
+
+}
+
 variable env {
 }

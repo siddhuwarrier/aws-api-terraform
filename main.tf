@@ -4,21 +4,30 @@ provider "aws" {
   region                  = var.aws_region
 }
 
+provider "aws" {
+  alias  = "replica_region"
+  region = var.aws_replica_region
+}
+
 module "vpc" {
-  source = "./vpc"
-  env    = var.env
+  source             = "./vpc"
+  env                = var.env
+  aws_replica_region = var.aws_replica_region
 }
 
 module "rds" {
-  source             = "./rds"
-  aws_region         = var.aws_region
-  aws_vpc_id         = module.vpc.aws_vpc_id
-  private_subnet_ids = module.vpc.private_subnet_ids
-  database_name      = var.database_name
-  database_username  = var.database_username
-  database_password  = var.database_password
-  db_bastion_sg_id   = module.vpc.db_bastion_sg_id
-  env                = var.env
+  source                     = "./rds"
+  aws_region                 = var.aws_region
+  aws_vpc_id                 = module.vpc.aws_vpc_id
+  private_subnet_ids         = module.vpc.private_subnet_ids
+  private_replica_subnet_ids = module.vpc.private_replica_subnet_ids
+  database_name              = var.database_name
+  database_username          = var.database_username
+  database_password          = var.database_password
+  db_bastion_sg_id           = module.vpc.db_bastion_sg_id
+  env                        = var.env
+  aws_replica_region         = var.aws_replica_region
+  aws_replica_vpc_id         = module.vpc.aws_replica_vpc_id
 }
 
 module "ec2" {
